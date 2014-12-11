@@ -2,6 +2,7 @@
   sudo: yes
   roles:
     - keypairs
+    - ansible
     - virtualbox
     - vagrant
     - vagrantfile
