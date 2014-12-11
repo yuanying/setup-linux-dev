@@ -26,5 +26,5 @@
 #     update_cache: yes
 - name: Install Vagrant
   apt:
-    deb: "vagrant"
+    name: "vagrant"
     update_cache: yes
