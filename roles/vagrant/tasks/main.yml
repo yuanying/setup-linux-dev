@@ -7,24 +7,24 @@
 #   with_items:
 #     - ruby-all-dev
 #
-# - name: Create download directory
-#   file:
-#     path: /var/download
-#     state: directory
-#     owner: root
-#     group: root
-#     mode: 0755
-#
-# - name: Download Vagrant
-#   get_url:
-#     url: "{{ vagrant.url }}"
-#     dest: "/var/download/{{ vagrant.package }}"
-#
-# - name: Install Vagrant
-#   apt:
-#     deb: "/var/download/{{ vagrant.package }}"
-#     update_cache: yes
+- name: Create download directory
+  file:
+    path: /var/download
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Download Vagrant
+  get_url:
+    url: "{{ vagrant.url }}"
+    dest: "/var/download/{{ vagrant.package }}"
+
 - name: Install Vagrant
   apt:
-    name: "vagrant"
+    deb: "/var/download/{{ vagrant.package }}"
     update_cache: yes
+# - name: Install Vagrant
+#   apt:
+#     name: "vagrant"
+#     update_cache: yes
