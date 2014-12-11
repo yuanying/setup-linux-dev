@@ -16,6 +16,6 @@
   copy:
     src: ansible
     dest: "/home/{{ remote.user }}/test-env/ansible"
-    directory_mode: 755
+    directory_mode: 0755
     owner: '{{ remote.user }}'
     group: '{{ remote.group }}'
