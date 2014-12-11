@@ -18,6 +18,16 @@
     cache_valid_time: 600
   with_items:
     - python-apt
+    - libgl1-mesa-glx
+    - libgl1
+    - libqt4-network
+    - libqt4-opengl
+    - libqtcore4
+    - libqtgui4
+    - libsdl1.2debian
+    - libvpx1
+    - libxcursor1
+    - libxinerama1
 
 - name: Create download directory
   file:
