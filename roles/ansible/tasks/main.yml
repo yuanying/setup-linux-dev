@@ -14,8 +14,8 @@
 
 - name: Copy ansible template files
   copy:
-    src: ansible
-    dest: "/home/{{ remote.user }}/test-env/ansible"
+    src: ansible/
+    dest: "/home/{{ remote.user }}/test-env/"
     directory_mode: 0755
     owner: '{{ remote.user }}'
     group: '{{ remote.group }}'
