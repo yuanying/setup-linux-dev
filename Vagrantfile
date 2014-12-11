@@ -10,7 +10,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, ip: "192.168.43.96", parallels__name: "intnet"
 
   config.vm.provider "parallels" do |v|
-    v.memory  = 2048
+    v.customize ["set", :id, "--nested-virt", "on"]
+    v.memory  = 5120
     v.cpus    = 1
   end
 

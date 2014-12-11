@@ -16,9 +16,24 @@
 #     deb: "/var/download/{{ virtualbox.package }}"
 #     update_cache: yes
 
+- name: Install Virtualbox dependency
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - linux-headers-generic
+    - linux-headers-3.13.0-24-generic
+
 - name: Install Virtualbox
   apt:
-    name: "virtualbox"
+    pkg: "{{ item }}"
+    state: latest
     update_cache: yes
-
-
+    cache_valid_time: 600
+  with_items:
+    - virtualbox
+    - virtualbox-dkms
+    - linux-headers-generic
+  register: kernel_result
