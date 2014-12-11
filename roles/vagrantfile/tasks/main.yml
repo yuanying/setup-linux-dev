@@ -10,8 +10,12 @@
   copy: 
     src: Vagrantfile
     dest: '/home/{{ remote.user }}/test-env/Vagrantfile'
+    owner: '{{ remote.user }}'
+    group: '{{ remote.group }}'
 
 - name: Copy provision file using Vagrantfile
   copy: 
     src: Vagrantfile
     dest: '/home/{{ remote.user }}/test-env/setup-vagrant.yml'
+    owner: '{{ remote.user }}'
+    group: '{{ remote.group }}'
