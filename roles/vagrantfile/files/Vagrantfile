@@ -3,7 +3,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 MANAGEMENT_NETWORK = '10.0.0'
-TUNNEL_NETWORK = '10.0.2'
+TUNNEL_NETWORK = '10.0.1'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box     = "ubuntu/trusty64"
