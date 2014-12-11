@@ -35,5 +35,4 @@
   with_items:
     - virtualbox
     - virtualbox-dkms
-    - linux-headers-generic
   register: kernel_result
