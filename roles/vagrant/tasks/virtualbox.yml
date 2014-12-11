@@ -23,13 +23,13 @@
 - name: Install Virtualbox
   command: "dpkg -i /var/download/{{ virtualbox.package }}"
 
-- name: Add virtualbox apt-key
+- name: Remove virtualbox apt-key
   apt_key:
     url: https://www.virtualbox.org/download/oracle_vbox.asc
     state: absent
     validate_certs: false
 
-- name: Add virtualbox apt repository
+- name: Remove virtualbox apt repository
   apt_repository:
     repo: 'deb http://download.virtualbox.org/virtualbox/debian trusty contrib'
     state: absent
