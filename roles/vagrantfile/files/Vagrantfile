@@ -13,8 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     controller.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "2048"]
     end
-    controller.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.11", virtualbox__intnet: "mngnet"
-    controller.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.11", virtualbox__intnet: "tunnet"
+    controller.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.11", virtualbox__hostonly: "mngnet"
+    controller.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.11", virtualbox__hostonly: "tunnet"
 
     controller.vm.provision :ansible do |ansible|
       ansible.playbook = "setup-vagrant.yml"
@@ -29,8 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                     "--nicpromisc4", "allow-all",
                   ]
     end
-    network.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.21", virtualbox__intnet: "mngnet"
-    network.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.21", virtualbox__intnet: "tunnet"
+    network.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.21", virtualbox__hostonly: "mngnet"
+    network.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.21", virtualbox__hostonly: "tunnet"
     network.vm.network :public_network
 
     network.vm.provision :ansible do |ansible|
@@ -43,8 +43,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     compute1.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "4096"]
     end
-    compute1.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.31", virtualbox__intnet: "mngnet"
-    compute1.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.31", virtualbox__intnet: "tunnet"
+    compute1.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.31", virtualbox__hostonly: "mngnet"
+    compute1.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.31", virtualbox__hostonly: "tunnet"
 
     compute1.vm.provision :ansible do |ansible|
       ansible.playbook = "setup-vagrant.yml"
