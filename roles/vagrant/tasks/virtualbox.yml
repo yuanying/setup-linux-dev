@@ -1,8 +1,8 @@
-- name: Remove virtualbox apt-key
-  apt_key:
-    url: https://www.virtualbox.org/download/oracle_vbox.asc
-    state: absent
-    validate_certs: false
+# - name: Remove virtualbox apt-key
+#   apt_key:
+#     url: https://www.virtualbox.org/download/oracle_vbox.asc
+#     state: absent
+#     validate_certs: false
 
 - name: Remove virtualbox apt repository
   apt_repository:
