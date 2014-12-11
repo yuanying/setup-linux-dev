@@ -1,18 +1,24 @@
-- name: Create download directory
-  file:
-    path: /var/download
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Download Virtualbox
-  get_url:
-    url: "{{ virtualbox.url }}"
-    dest: "/var/download/{{ virtualbox.package }}"
+# - name: Create download directory
+#   file:
+#     path: /var/download
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: 0755
+#
+# - name: Download Virtualbox
+#   get_url:
+#     url: "{{ virtualbox.url }}"
+#     dest: "/var/download/{{ virtualbox.package }}"
+#
+# - name: Install Virtualbox
+#   apt:
+#     deb: "/var/download/{{ virtualbox.package }}"
+#     update_cache: yes
 
 - name: Install Virtualbox
   apt:
-    deb: "/var/download/{{ virtualbox.package }}"
+    deb: "virtualbox"
     update_cache: yes
+
 
