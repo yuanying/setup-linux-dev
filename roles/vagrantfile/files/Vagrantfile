@@ -16,6 +16,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     controller.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.11", virtualbox__intnet: "mngnet"
     controller.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.11", virtualbox__intnet: "tunnet"
 
+    controller.vm.provision :ansible do |ansible|
+      ansible.playbook = "setup-vagrant.yml"
+      ansible.host_key_checking = false
+    end
   end
   config.vm.define :network do |network|
     network.vm.hostname = "network"
@@ -28,6 +32,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     network.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.21", virtualbox__intnet: "mngnet"
     network.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.21", virtualbox__intnet: "tunnet"
     network.vm.network :public_network
+
+    network.vm.provision :ansible do |ansible|
+      ansible.playbook = "setup-vagrant.yml"
+      ansible.host_key_checking = false
+    end
   end
   config.vm.define :compute1 do |compute1|
     compute1.vm.hostname = "compute1"
@@ -36,5 +45,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     compute1.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.31", virtualbox__intnet: "mngnet"
     compute1.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.31", virtualbox__intnet: "tunnet"
+
+    compute1.vm.provision :ansible do |ansible|
+      ansible.playbook = "setup-vagrant.yml"
+      ansible.host_key_checking = false
+    end
   end
 end
