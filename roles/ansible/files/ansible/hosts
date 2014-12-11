@@ -1,6 +1,6 @@
 [control]
-10.0.0.11
+10.0.0.11 ansible_ssh_user=vagrant
 [network]
-10.0.0.21
+10.0.0.21 ansible_ssh_user=vagrant
 [compute]
-10.0.0.31
+10.0.0.31 ansible_ssh_user=vagrant
