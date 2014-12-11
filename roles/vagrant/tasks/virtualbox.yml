@@ -1,0 +1,29 @@
+- name: Install virtualbox dependency
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - python-apt
+
+- name: Add virtualbox apt-key
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present
+
+- name: Add virtualbox apt repository
+  apt_repository:
+    repo: 'deb http://download.virtualbox.org/virtualbox/debian trusty contrib'
+    state: present
+    update_cache: yes
+
+- name: Install virtualbox
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - virtualbox-4.3
+    - dkms

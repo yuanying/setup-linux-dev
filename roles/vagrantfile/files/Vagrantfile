@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+VAGRANTFILE_API_VERSION = "2"
+
+MANAGEMENT_NETWORK = '10.0.0.'
+TUNNEL_NETWORK = '10.0.2.'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box     = "ubuntu/trusty64"
+
+  config.vm.define :control do |controller|
+    controller.vm.hostname = "controller"
+    controller.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+    controller.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.11", virtualbox__intnet: "mngnet"
+    controller.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.11", virtualbox__intnet: "tunnet"
+
+  end
+  config.vm.define :network do |network|
+    network.vm.hostname = "network"
+    network.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id,
+                    "--memory", "1024",
+                    "--nicpromisc4", "allow-all",
+                  ]
+    end
+    network.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.21", virtualbox__intnet: "mngnet"
+    network.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.21", virtualbox__intnet: "tunnet"
+    network.vm.network :public_network
+  end
+  config.vm.define :compute1 do |compute1|
+    compute1.vm.hostname = "compute1"
+    compute1.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
+    end
+    compute1.vm.network :private_network, ip: "#{MANAGEMENT_NETWORK}.31", virtualbox__intnet: "mngnet"
+    compute1.vm.network :private_network, ip: "#{TUNNEL_NETWORK}.31", virtualbox__intnet: "tunnet"
+  end
+end

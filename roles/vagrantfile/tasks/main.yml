@@ -1,0 +1,12 @@
+- name: Create vagrantfile directory
+  file:
+    path: '/home/{{ remote.user }}/test-env'
+    state: directory
+    owner: '{{ remote.user }}'
+    group: '{{ remote.group }}'
+    mode: 0755
+
+- name: Copy Vagrantfile
+  copy: 
+    src: Vagrantfile
+    dest: '/home/{{ remote.user }}/test-env/Vagrantfile'
