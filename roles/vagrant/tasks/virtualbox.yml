@@ -23,17 +23,17 @@
 - name: Install Virtualbox
   command: "dpkg -i /var/download/{{ virtualbox.package }}"
 
-# - name: Add virtualbox apt-key
-#   apt_key:
-#     url: https://www.virtualbox.org/download/oracle_vbox.asc
-#     state: present
-#     validate_certs: false
-#
-# - name: Add virtualbox apt repository
-#   apt_repository:
-#     repo: 'deb http://download.virtualbox.org/virtualbox/debian trusty contrib'
-#     state: present
-#     update_cache: yes
+- name: Add virtualbox apt-key
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: absent
+    validate_certs: false
+
+- name: Add virtualbox apt repository
+  apt_repository:
+    repo: 'deb http://download.virtualbox.org/virtualbox/debian trusty contrib'
+    state: absent
+    # update_cache: yes
 #
 # - name: Install virtualbox
 #   apt:
