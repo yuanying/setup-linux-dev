@@ -11,6 +11,7 @@
   apt_key:
     url: https://www.virtualbox.org/download/oracle_vbox.asc
     state: present
+    validate_certs: false
 
 - name: Add virtualbox apt repository
   apt_repository:
