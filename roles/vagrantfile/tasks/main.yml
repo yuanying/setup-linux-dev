@@ -6,13 +6,13 @@
     mode: 0755
 
 - name: Copy Vagrantfile
-sudo: no
-  copy: 
+  sudo: no
+  copy:
     src: Vagrantfile
     dest: '~/test-env/Vagrantfile'
 
 - name: Copy provision file using Vagrantfile
   sudo: no
-  copy: 
+  copy:
     src: setup-vagrant.yml
     dest: '~/test-env/setup-vagrant.yml'
