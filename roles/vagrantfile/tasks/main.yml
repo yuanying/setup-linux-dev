@@ -1,21 +1,18 @@
 - name: Create vagrantfile directory
+  sudo: no
   file:
-    path: '/home/{{ remote.user }}/test-env'
+    path: '~/test-env'
     state: directory
-    owner: '{{ remote.user }}'
-    group: '{{ remote.group }}'
     mode: 0755
 
 - name: Copy Vagrantfile
+sudo: no
   copy: 
     src: Vagrantfile
-    dest: '/home/{{ remote.user }}/test-env/Vagrantfile'
-    owner: '{{ remote.user }}'
-    group: '{{ remote.group }}'
+    dest: '~/test-env/Vagrantfile'
 
 - name: Copy provision file using Vagrantfile
+  sudo: no
   copy: 
     src: setup-vagrant.yml
-    dest: '/home/{{ remote.user }}/test-env/setup-vagrant.yml'
-    owner: '{{ remote.user }}'
-    group: '{{ remote.group }}'
+    dest: '~/test-env/setup-vagrant.yml'

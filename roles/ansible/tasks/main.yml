@@ -13,9 +13,8 @@
   pip: name=ansible
 
 - name: Copy ansible template files
+  sudo: no
   copy:
     src: ansible/
-    dest: "/home/{{ remote.user }}/test-env/"
+    dest: "{{ ansible_env.HOME }}/test-env/"
     directory_mode: 0755
-    owner: '{{ remote.user }}'
-    group: '{{ remote.group }}'

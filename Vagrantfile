@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "setup-vagrant.yml"
+    ansible.playbook = "vagrant/setup-vagrant.yml"
     ansible.host_key_checking = false
   end
 end
