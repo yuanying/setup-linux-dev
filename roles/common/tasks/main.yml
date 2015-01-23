@@ -15,33 +15,36 @@
     line: 'Defaults env_keep+="https_proxy"'
     validate: 'visudo -cf %s'
 
+- debug:
+    msg: "http_proxy: {{ http_proxy }}"
+
 - name: Add http_proxy to .bashrc
   lineinfile:
     dest: '~/.bashrc'
     state: present
     line: 'export http_proxy={{ http_proxy }}'
-  when: http_proxy | default(False)
+  when: http_proxy
 
 - name: Remove http_proxy to .bashrc
   lineinfile:
     dest: '~/.bashrc'
     state: absent
     regexp: "^export\\s+http_proxy\\=.*"
-  when: http_proxy is not defined | default(False)
+  when: http_proxy == False
 
 - name: Add https_proxy to .bashrc
   lineinfile:
     dest: '~/.bashrc'
     state: present
     line: 'export https_proxy={{ https_proxy }}'
-  when: https_proxy | default(False)
+  when: http_proxy
 
 - name: Remove https_proxy to .bashrc
   lineinfile:
     dest: '~/.bashrc'
     state: absent
     regexp: "^export\\s+https_proxy\\=.*"
-  when: http_proxy is not defined | default(False)
+  when: http_proxy == False
 
 - name: Setup proxy to apt command
   template:
