@@ -15,15 +15,13 @@
     line: 'Defaults env_keep+="https_proxy"'
     validate: 'visudo -cf %s'
 
-- debug:
-    msg: "http_proxy: {{ http_proxy }}"
-
 - name: Add http_proxy to .bashrc
   lineinfile:
     dest: '~/.bashrc'
     state: present
     line: 'export http_proxy={{ http_proxy }}'
-  when: http_proxy
+    create: yes
+  when: http_proxy | default(False)
 
 - name: Remove http_proxy to .bashrc
   lineinfile:
@@ -37,7 +35,8 @@
     dest: '~/.bashrc'
     state: present
     line: 'export https_proxy={{ https_proxy }}'
-  when: http_proxy
+    create: yes
+  when: http_proxy | default(False)
 
 - name: Remove https_proxy to .bashrc
   lineinfile:

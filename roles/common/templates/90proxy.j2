@@ -1,6 +1,6 @@
-{% if http_proxy %}
+{% if http_proxy | default(False) %}
 Acquire::http::proxy "{{ http_proxy }}";
 {% endif %}
-{% if https_proxy %}
+{% if https_proxy | default(False) %}
 Acquire::https::proxy "{{ https_proxy }}";
 {% endif %}
