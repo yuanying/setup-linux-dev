@@ -1,6 +1,6 @@
 - hosts: all
   roles:
-    - { role: common, sudo: yes }
+    - { role: common }
     - { role: ansible, sudo: yes }
     - { role: virtualbox, sudo: yes }
     - { role: vagrant, sudo: yes }

@@ -20,7 +20,6 @@
     dest: '~/.bashrc'
     state: present
     line: 'export http_proxy={{ http_proxy }}'
-    create: yes
   when: http_proxy | default(False)
 
 - name: Remove http_proxy to .bashrc
@@ -35,7 +34,6 @@
     dest: '~/.bashrc'
     state: present
     line: 'export https_proxy={{ https_proxy }}'
-    create: yes
   when: http_proxy | default(False)
 
 - name: Remove https_proxy to .bashrc
@@ -46,6 +44,7 @@
   when: http_proxy == False
 
 - name: Setup proxy to apt command
+  sudo: yes
   template:
     src: 90proxy.j2
     dest: /etc/apt/apt.conf.d/90proxy

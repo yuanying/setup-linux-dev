@@ -9,7 +9,7 @@ Setup local development environment
 
     $ sudo apt-get update && sudo apt-get install -y python-pip
     $ sudo pip install ansible
-    $ ansible-playbook -i hosts/local setup-vagrant.yml \
+    $ ansible-playbook -i hosts/local setup-devenv.yml \
                        -e "@vars/local.yml" --connection=local
 
 ### Example of vars/local.yml
@@ -31,5 +31,3 @@ Setup local development environment
     $ # Write vars/production.yml
     $ ansible-playbook -i hosts/production setup-server.yml \
                        -e "@vars/production.yml"
-
-
