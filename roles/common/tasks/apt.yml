@@ -1,0 +1,8 @@
+- name: Install development dependencies
+  sudo: yes
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - build-essential
+    - libssl-dev

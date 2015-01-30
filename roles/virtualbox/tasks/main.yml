@@ -17,6 +17,7 @@
 #     update_cache: yes
 
 - name: Install Virtualbox dependency
+  sudo: yes
   apt:
     pkg: "{{ item }}"
     state: latest
@@ -24,9 +25,10 @@
     cache_valid_time: 600
   with_items:
     - linux-headers-generic
-    - linux-headers-3.13.0-24-generic
+    #- linux-headers-3.13.0-24-generic
 
 - name: Install Virtualbox
+  sudo: yes
   apt:
     pkg: "{{ item }}"
     state: latest
