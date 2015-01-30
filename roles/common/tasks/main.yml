@@ -1,2 +1,2 @@
-- include: apt.yml
 - include: proxy.yml
+- include: apt.yml

@@ -34,14 +34,48 @@
     dest: '~/.bashrc'
     state: present
     line: 'export https_proxy={{ https_proxy }}'
-  when: http_proxy | default(False)
+  when: https_proxy | default(False)
 
 - name: Remove https_proxy to .bashrc
   lineinfile:
     dest: '~/.bashrc'
     state: absent
     regexp: "^export\\s+https_proxy\\=.*"
+  when: https_proxy == False
+
+- name: Add http_proxy to /etc/profile.d/proxy.sh
+  sudo: yes
+  lineinfile:
+    create: yes
+    dest: '/etc/profile.d/proxy.sh'
+    state: present
+    line: 'export http_proxy={{ http_proxy }}'
+  when: http_proxy | default(False)
+
+- name: Remove http_proxy to /etc/profile.d/proxy.sh
+  sudo: yes
+  lineinfile:
+    dest: '/etc/profile.d/proxy.sh'
+    state: absent
+    regexp: "^export\\s+http_proxy\\=.*"
   when: http_proxy == False
+
+- name: Add https_proxy to /etc/profile.d/proxy.sh
+  sudo: yes
+  lineinfile:
+    create: yes
+    dest: '/etc/profile.d/proxy.sh'
+    state: present
+    line: 'export https_proxy={{ https_proxy }}'
+  when: https_proxy | default(False)
+
+- name: Remove https_proxy to /etc/profile.d/proxy.sh
+  sudo: yes
+  lineinfile:
+    dest: '/etc/profile.d/proxy.sh'
+    state: absent
+    regexp: "^export\\s+https_proxy\\=.*"
+  when: https_proxy == False
 
 - name: Setup proxy to apt command
   sudo: yes

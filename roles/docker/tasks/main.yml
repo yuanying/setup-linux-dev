@@ -1,8 +1,12 @@
 - name: Add Docker repository key
   apt_key:
     id: "{{ apt_key_sig }}"
-    url: "{{ apt_key_url }}"
+    # url: "{{ apt_key_url }}"
+    # id: "{{ apt_key_id }}"
+    keyserver: "{{ apt_key_server }}"
     state: present
+  environment:
+    http_proxy: "{{ http_proxy }}"
 
 - name: Add Docker repository
   apt_repository:
@@ -24,7 +28,7 @@
   notify:
     - Reload docker
   when: "export_docker_host"
-  
+
 - name: Install pip python package
   apt:
     pkg: "{{ item }}"

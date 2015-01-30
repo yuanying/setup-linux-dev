@@ -1,5 +1,7 @@
 apt_key_url: http://get.docker.io/gpg
+apt_key_server: hkp://keyserver.ubuntu.com:80
 apt_key_sig: A88D21E9
+apt_key_id: 36A1D7869245C8950F966E92D8576A8BA88D21E9
 apt_repository: deb http://get.docker.io/ubuntu docker main
 docker_opts: "--restart=true"
 export_docker_host: true
