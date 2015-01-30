@@ -1,16 +1,35 @@
 # README
 
-    $ ansible-playbook -i hosts/test setup-vagrant.yml -e "@vars/test.yml"
-    $ ansible-playbook -i hosts/production setup-vagrant.yml -e "@vars/production.yml"
+1. Setup development environment
+2. Setup server
 
-If you use this script on local:
+## Setup development environment
+
+Setup local development environment
 
     $ sudo apt-get update && sudo apt-get install -y python-pip
     $ sudo pip install ansible
-    $ ansible-playbook -i hosts/local setup-vagrant.yml -e "@vars/local.yml" --connection=Local
+    $ ansible-playbook -i hosts/local setup-vagrant.yml \
+                       -e "@vars/local.yml" --connection=local
 
-## Example of loca.yml
+### Example of vars/local.yml
 
     ---
     http_proxy: http://proxy.host:8080
     https_proxy: http://proxy.host:8080
+
+## Setup server
+
+### Test
+
+    $ vagrant up
+    $ ansible-playbook -i hosts/test setup-server.yml -e "@vars/test.yml"
+
+### Setup production environment
+
+    $ # Write hosts/production
+    $ # Write vars/production.yml
+    $ ansible-playbook -i hosts/production setup-server.yml \
+                       -e "@vars/production.yml"
+
+

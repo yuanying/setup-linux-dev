@@ -1,4 +1,0 @@
-opera.maas ansible_ssh_user=ubuntu
-garnier.maas ansible_ssh_user=ubuntu
-concord.maas ansible_ssh_user=ubuntu
-louvre.maas ansible_ssh_user=ubuntu

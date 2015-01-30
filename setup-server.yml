@@ -1,0 +1,7 @@
+- hosts: all
+  roles:
+    - { role: common, sudo: yes }
+    - { role: docker, sudo: yes }
+    - { role: mysql, sudo: yes }
+    - { role: nginx, sudo: yes }
+
