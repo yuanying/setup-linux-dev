@@ -6,7 +6,7 @@
     keyserver: "{{ apt_key_server }}"
     state: present
   environment:
-    http_proxy: "{{ http_proxy }}"
+    http_proxy: "{{ proxy.http_proxy }}"
 
 - name: Add Docker repository
   apt_repository:
