@@ -1,0 +1,24 @@
+# - name: Add Defaults to env_keep http_proxy
+#   # when: http_proxy
+#   sudo: yes
+#   lineinfile:
+#     dest: "/etc/sudoers"
+#     state: present
+#     line: 'Defaults env_keep="http_proxy"'
+#     validate: 'visudo -cf %s'
+# - name: Add Defaults to env_keep https_proxy
+#   # when: http_proxy
+#   sudo: yes
+#   lineinfile:
+#     dest: "/etc/sudoers"
+#     state: present
+#     line: 'Defaults env_keep+="https_proxy"'
+#     validate: 'visudo -cf %s'
+# - name: Add Defaults to env_keep no_proxy
+#   # when: http_proxy
+#   sudo: yes
+#   lineinfile:
+#     dest: "/etc/sudoers"
+#     state: present
+#     line: 'Defaults env_keep+="no_proxy"'
+#     validate: 'visudo -cf %s'
