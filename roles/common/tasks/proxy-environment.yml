@@ -4,7 +4,7 @@
     create: yes
     dest: '/etc/environment'
     state: present
-    line: 'export no_proxy={{ proxy.no_proxy }}'
+    line: 'no_proxy={{ proxy.no_proxy }}'
   when: proxy.no_proxy | default(False)
 
 - name: Add http_proxy to /etc/environment
@@ -13,7 +13,7 @@
     create: yes
     dest: '/etc/environment'
     state: present
-    line: 'export http_proxy={{ proxy.http_proxy }}'
+    line: 'http_proxy={{ proxy.http_proxy }}'
   when: proxy.http_proxy | default(False)
 
 - name: Remove http_proxy to /etc/environment
@@ -21,7 +21,7 @@
   lineinfile:
     dest: '/etc/environment'
     state: absent
-    regexp: "^export\\s+http_proxy\\=.*"
+    regexp: "^http_proxy\\=.*"
   when: proxy.http_proxy == False
 
 - name: Add https_proxy to /etc/environment
@@ -30,7 +30,7 @@
     create: yes
     dest: '/etc/environment'
     state: present
-    line: 'export https_proxy={{ proxy.https_proxy }}'
+    line: 'https_proxy={{ proxy.https_proxy }}'
   when: proxy.https_proxy | default(False)
 
 - name: Remove https_proxy to /etc/environment
@@ -38,5 +38,5 @@
   lineinfile:
     dest: '/etc/environment'
     state: absent
-    regexp: "^export\\s+https_proxy\\=.*"
+    regexp: "^https_proxy\\=.*"
   when: proxy.https_proxy == False
