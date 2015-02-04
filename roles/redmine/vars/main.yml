@@ -1,0 +1,7 @@
+redmine_host: redmine
+redmine_port: 10080
+redmine:
+  db:
+    name: redmine_production
+    user: redmine
+    password: redmine9871

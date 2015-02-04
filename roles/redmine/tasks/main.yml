@@ -1,0 +1,63 @@
+- name: Upstart redmine conf
+  copy: src=upstart.conf dest=/etc/init/redmine.conf
+
+- name: Create redmine plugin directory
+  file:
+    path: /volumes/redmine/data/plugins
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+# - name: Copy redmine plugin script
+#   copy:
+#     src: init
+#     dest: /volumes/redmine/data/plugins/init
+#     mode: 0755
+#
+# - name: Install redmine backlogs plugin
+#   git:
+#     repo: https://github.com/backlogs/redmine_backlogs.git
+#     dest: /volumes/redmine/data/plugins/redmine_backlogs
+#     version: v1.0.6
+
+- name: Create redmine database
+  docker:
+    name: create-redmine-database
+    image: mysql
+    links: mysql-container:mysql
+    detach: False
+    command: >
+      sh -c 'exec echo "create database if not exists {{ redmine.db.name }} DEFAULT CHARACTER SET utf8" | 
+      mysql -h"$MYSQL_PORT_3306_TCP_ADDR" 
+      -P"$MYSQL_PORT_3306_TCP_PORT" 
+      -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
+- name: Create redmine database user
+  docker:
+    name: create-redmine-database-user
+    image: mysql
+    links: mysql-container:mysql
+    detach: False
+    command: >
+      sh -c 'exec
+      echo "GRANT ALL PRIVILEGES on {{ redmine.db.name }}.* TO {{ redmine.db.user }} IDENTIFIED BY '\''{{ redmine.db.password }}'\'';" |
+      mysql -h"$MYSQL_PORT_3306_TCP_ADDR" 
+      -P"$MYSQL_PORT_3306_TCP_PORT" 
+      -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
+- name: redmine container
+  docker:
+    name: redmine-container
+    links: mysql-container:mysql
+    image: sameersbn/redmine:2.5.1
+    volumes: /volumes:/volumes,/volumes/redmine/data:/home/redmine/data
+    ports: "{{ redmine_port }}:80"
+    env: DB_NAME={{ redmine.db.name }},DB_USER={{ redmine.db.user }},DB_PASS={{ redmine.db.password }}
+  notify: Start redmine container
+
+- name: redmine site
+  template:
+    src: site.conf
+    dest: /volumes/etc/nginx/sites-enabled/redmine.conf
+  notify: Restart Nginx container

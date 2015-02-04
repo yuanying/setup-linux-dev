@@ -4,3 +4,4 @@
     - { role: docker, sudo: yes }
     - { role: mysql, sudo: yes }
     - { role: nginx, sudo: yes }
+    - { role: redmine, sudo: yes }

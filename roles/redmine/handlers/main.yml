@@ -1,0 +1,5 @@
+- name: Start redmine container
+  service: name=redmine state=started
+
+- name: Restart redmine container
+  service: name=redmine state=restarted
