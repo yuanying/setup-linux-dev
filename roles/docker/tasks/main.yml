@@ -1,3 +1,14 @@
+- name: Expose docker host
+  template:
+    src: docker.j2
+    dest: /etc/default/docker
+    owner: root
+    group: root
+    mode: 0744
+  notify:
+    - Reload docker
+  when: "export_docker_host"
+
 - name: Add Docker repository key
   apt_key:
     id: "{{ apt_key_sig }}"
@@ -5,8 +16,6 @@
     # id: "{{ apt_key_id }}"
     keyserver: "{{ apt_key_server }}"
     state: present
-  environment:
-    http_proxy: "{{ proxy.http_proxy }}"
 
 - name: Add Docker repository
   apt_repository:
@@ -17,17 +26,6 @@
 - name: Install Docker
   apt: pkg={{ docker_lxc_pkg }}
   notify: "Start Docker"
-
-- name: Expose docker host
-  copy:
-    content: "DOCKER_OPTS=\"{{ docker_opts }}\""
-    dest: /etc/default/docker
-    owner: root
-    group: root
-    mode: 0744
-  notify:
-    - Reload docker
-  when: "export_docker_host"
 
 - name: Install pip python package
   apt:

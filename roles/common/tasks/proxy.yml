@@ -1,4 +1,3 @@
 - include: proxy-environment.yml
 - include: proxy-apt.yml
-# - include: proxy-sudoers.yml
-
+- include: proxy-sudoers.yml

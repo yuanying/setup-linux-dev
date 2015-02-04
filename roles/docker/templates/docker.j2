@@ -1,0 +1,7 @@
+DOCKER_OPTS="{{ docker_opts }}"
+{% if proxy.http_proxy | default(False) %}
+export http_proxy="{{ proxy.http_proxy }}"
+{% endif %}
+{% if proxy.https_proxy | default(False) %}
+export https_proxy="{{ proxy.https_proxy }}"
+{% endif %}
