@@ -4,8 +4,9 @@
     create: yes
     dest: '/etc/environment'
     state: present
-    line: 'no_proxy={{ proxy.no_proxy }}'
+    line: 'no_proxy="{{ proxy.no_proxy }}"'
   when: proxy.no_proxy | default(False)
+  register: no_proxy_result
 
 - name: Add http_proxy to /etc/environment
   sudo: yes
@@ -13,8 +14,9 @@
     create: yes
     dest: '/etc/environment'
     state: present
-    line: 'http_proxy={{ proxy.http_proxy }}'
+    line: 'http_proxy="{{ proxy.http_proxy }}"'
   when: proxy.http_proxy | default(False)
+  register: http_proxy_result
 
 - name: Remove http_proxy to /etc/environment
   sudo: yes
@@ -23,6 +25,7 @@
     state: absent
     regexp: "^http_proxy\\=.*"
   when: proxy.http_proxy == False
+  register: remove_http_proxy_result
 
 - name: Add https_proxy to /etc/environment
   sudo: yes
@@ -30,8 +33,9 @@
     create: yes
     dest: '/etc/environment'
     state: present
-    line: 'https_proxy={{ proxy.https_proxy }}'
+    line: 'https_proxy="{{ proxy.https_proxy }}"'
   when: proxy.https_proxy | default(False)
+  register: https_proxy_result
 
 - name: Remove https_proxy to /etc/environment
   sudo: yes
@@ -40,3 +44,14 @@
     state: absent
     regexp: "^https_proxy\\=.*"
   when: proxy.https_proxy == False
+  register: remove_https_proxy_result
+
+- name: Restart sshd
+  service: name=ssh state=restarted
+  sudo: yes
+  when: >
+    no_proxy_result.changed == true or
+    http_proxy_result.changed == true or
+    https_proxy_result.changed == true or
+    remove_http_proxy_result.changed == true or
+    remove_https_proxy_result.changed == true
