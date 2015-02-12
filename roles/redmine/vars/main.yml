@@ -5,3 +5,5 @@ redmine:
     name: redmine_production
     user: redmine
     password: redmine9871
+  backlogs:
+    enable: false

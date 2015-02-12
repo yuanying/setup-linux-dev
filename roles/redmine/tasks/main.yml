@@ -9,17 +9,19 @@
     group: root
     mode: 0755
 
-# - name: Copy redmine plugin script
-#   copy:
-#     src: init
-#     dest: /volumes/redmine/data/plugins/init
-#     mode: 0755
-#
-# - name: Install redmine backlogs plugin
-#   git:
-#     repo: https://github.com/backlogs/redmine_backlogs.git
-#     dest: /volumes/redmine/data/plugins/redmine_backlogs
-#     version: v1.0.6
+- name: Copy redmine plugin script
+  copy:
+    src: init
+    dest: /volumes/redmine/data/plugins/init
+    mode: 0755
+    when: redmine.backlogs.enable
+
+- name: Install redmine backlogs plugin
+  git:
+    repo: https://github.com/backlogs/redmine_backlogs.git
+    dest: /volumes/redmine/data/plugins/redmine_backlogs
+    version: v1.0.6
+    when: redmine.backlogs.enable
 
 - name: Create redmine database
   docker:
