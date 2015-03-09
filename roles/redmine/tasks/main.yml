@@ -52,7 +52,7 @@
   docker:
     name: redmine-container
     links: mysql-container:mysql
-    image: sameersbn/redmine:2.5.1
+    image: sameersbn/redmine:{{ redmine.version }}
     volumes: /volumes:/volumes,/volumes/redmine/data:/home/redmine/data
     ports: "{{ redmine_port }}:80"
     env: DB_NAME={{ redmine.db.name }},DB_USER={{ redmine.db.user }},DB_PASS={{ redmine.db.password }}

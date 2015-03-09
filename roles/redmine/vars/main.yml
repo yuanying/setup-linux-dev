@@ -1,6 +1,7 @@
 redmine_host: redmine
 redmine_port: 10080
 redmine:
+  version: 2.5.1
   db:
     name: redmine_production
     user: redmine
