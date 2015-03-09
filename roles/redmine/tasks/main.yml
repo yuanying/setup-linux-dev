@@ -14,14 +14,14 @@
     src: init
     dest: /volumes/redmine/data/plugins/init
     mode: 0755
-    when: redmine.backlogs.enable
+  when: redmine.backlogs.enable
 
 - name: Install redmine backlogs plugin
   git:
     repo: https://github.com/backlogs/redmine_backlogs.git
     dest: /volumes/redmine/data/plugins/redmine_backlogs
     version: v1.0.6
-    when: redmine.backlogs.enable
+  when: redmine.backlogs.enable
 
 - name: Create redmine database
   docker:
@@ -30,9 +30,9 @@
     links: mysql-container:mysql
     detach: False
     command: >
-      sh -c 'exec echo "create database if not exists {{ redmine.db.name }} DEFAULT CHARACTER SET utf8" | 
-      mysql -h"$MYSQL_PORT_3306_TCP_ADDR" 
-      -P"$MYSQL_PORT_3306_TCP_PORT" 
+      sh -c 'exec echo "create database if not exists {{ redmine.db.name }} DEFAULT CHARACTER SET utf8" |
+      mysql -h"$MYSQL_PORT_3306_TCP_ADDR"
+      -P"$MYSQL_PORT_3306_TCP_PORT"
       -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
 
 - name: Create redmine database user
@@ -44,8 +44,8 @@
     command: >
       sh -c 'exec
       echo "GRANT ALL PRIVILEGES on {{ redmine.db.name }}.* TO {{ redmine.db.user }} IDENTIFIED BY '\''{{ redmine.db.password }}'\'';" |
-      mysql -h"$MYSQL_PORT_3306_TCP_ADDR" 
-      -P"$MYSQL_PORT_3306_TCP_PORT" 
+      mysql -h"$MYSQL_PORT_3306_TCP_ADDR"
+      -P"$MYSQL_PORT_3306_TCP_PORT"
       -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
 
 - name: redmine container
