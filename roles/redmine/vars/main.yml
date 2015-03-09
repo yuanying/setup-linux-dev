@@ -1,10 +1,14 @@
 redmine_host: redmine
 redmine_port: 10080
 redmine:
-  version: 2.5.1
+  version: 2.6.1
   db:
     name: redmine_production
     user: redmine
     password: redmine9871
-  backlogs:
-    enable: false
+redmine_plugins:
+  - git: https://github.com/backlogs/redmine_backlogs.git
+    name: redmine_backlogs
+redmine_themes:
+  - git: https://github.com/makotokw/redmine-theme-gitmike.git
+    name: gitmake

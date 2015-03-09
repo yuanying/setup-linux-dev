@@ -1,12 +1,3 @@
 # http_proxy: http://localhost:8080
 router_address: 192.168.43.96
 domain: 192.168.43.96.xip.io
-
-redmine:
-  version: 2.5.3-1
-  db:
-    name: redmine_production
-    user: redmine
-    password: redmine9871
-  backlogs:
-    enable: true

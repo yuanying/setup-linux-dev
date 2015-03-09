@@ -1,7 +1,7 @@
 - name: Upstart redmine conf
   copy: src=upstart.conf dest=/etc/init/redmine.conf
 
-- name: Create redmine plugin directory
+- name: Create redmine plugins directory
   file:
     path: /volumes/redmine/data/plugins
     state: directory
@@ -9,19 +9,25 @@
     group: root
     mode: 0755
 
-- name: Copy redmine plugin script
-  copy:
-    src: init
-    dest: /volumes/redmine/data/plugins/init
-    mode: 0755
-  when: redmine.backlogs.enable
-
-- name: Install redmine backlogs plugin
+- name: Install redmine plugins
   git:
-    repo: https://github.com/backlogs/redmine_backlogs.git
-    dest: /volumes/redmine/data/plugins/redmine_backlogs
-    version: v1.0.6
-  when: redmine.backlogs.enable
+    repo: "{{ item.git }}"
+    dest: /volumes/redmine/data/plugins/{{ item.name }}
+  with_items: redmine_plugins
+
+- name: Create redmine theme directory
+  file:
+    path: /volumes/redmine/data/themes
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install redmine themes
+  git:
+    repo: "{{ item.git }}"
+    dest: /volumes/redmine/data/themes/{{ item.name }}
+  with_items: redmine_themes
 
 - name: Create redmine database
   docker:

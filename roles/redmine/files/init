@@ -1,4 +1,0 @@
-
-cd /home/redmine/redmine
-rake redmine:backlogs:install RAILS_ENV=”production”
-rake redmine:backlogs:generate_chart_data RAILS_ENV=”production”
