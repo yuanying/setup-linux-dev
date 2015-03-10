@@ -46,8 +46,8 @@
   when: proxy.https_proxy == False
   register: remove_https_proxy_result
 
-- name: Restart sshd
-  service: name=ssh state=restarted
+- name: Restart server
+  command: reboot
   sudo: yes
   when: >
     no_proxy_result.changed == true or
@@ -55,3 +55,13 @@
     https_proxy_result.changed == true or
     remove_http_proxy_result.changed == true or
     remove_https_proxy_result.changed == true
+  register: restart_result
+
+- name: Wait for server reboot
+  local_action:
+    module: wait_for
+      host="{{ inventory_hostname }}"
+      port=22
+      delay=5
+      timeout=300
+  sudo: false
