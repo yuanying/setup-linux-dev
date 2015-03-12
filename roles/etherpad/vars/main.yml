@@ -1,3 +1,2 @@
 etherpad_host: etherpad
-etherpad_port:9001
-
+etherpad_port: 9001
