@@ -1,0 +1,24 @@
+- name: Upstart etherpad conf
+  copy: src=upstart.conf dest=/etc/init/etherpad.conf
+
+- name: Create etherpad plugins directory
+  file:
+    path: /volumes/etherpad/data/plugins
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: etherpad container
+  docker:
+    name: etherpad-container
+    links: mysql-container:mysql
+    image: tvelocity/etherpad-lite
+    ports: "{{ etherpad_port }}:9001"
+  notify: Start etherpad container
+
+- name: etherpad site
+  template:
+    src: site.conf
+    dest: /volumes/etc/nginx/sites-enabled/etherpad.conf
+  notify: Restart Nginx container
