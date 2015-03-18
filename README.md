@@ -25,6 +25,7 @@ Setup local development environment
 
     $ vagrant up
     $ ansible-playbook -i hosts/test setup-server.yml -e "@vars/test.yml"
+    $ ansible-playbook -i hosts/test setup-server-without-monitor.yml -e "@vars/test.yml"
 
 ### Setup production environment
 
