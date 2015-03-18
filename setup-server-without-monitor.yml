@@ -7,3 +7,4 @@
     - { role: nginx, sudo: yes }
     - { role: redmine, sudo: yes }
     - { role: etherpad, sudo: yes }
+    - { role: gitlab, sudo: yes }

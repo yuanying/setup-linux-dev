@@ -11,3 +11,4 @@
     - { role: grack, sudo: yes }
     - { role: cadvisor, sudo: yes }
     - { role: grafana, sudo: yes }
+    - { role: gitlab, sudo: yes }
