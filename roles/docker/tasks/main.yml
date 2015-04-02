@@ -38,8 +38,15 @@
     - python-pip
   register: kernel_result
 
+- name: Upgrade pip
+  pip: name=pip version=6.0.8
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 - name: Install Docker-py
   pip: name=docker-py
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 - name: Check if /etc/updatedb.conf exists
   stat: path=/etc/updatedb.conf
