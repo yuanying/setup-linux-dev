@@ -1,0 +1,5 @@
+- name: Start mongo container
+  service: name=mongo state=started
+
+- name: Restart mongo container
+  service: name=mongo state=restarted

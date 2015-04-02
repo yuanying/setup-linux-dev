@@ -1,0 +1,18 @@
+- name: Upstart letschat conf
+  copy: src=upstart.conf dest=/etc/init/letschat.conf
+
+- name: letschat container
+  docker:
+    name: letschat-container
+    links: mongo-container:db
+    image: mkodockx/docker-lets-chat
+    hostname: "{{ letschat_host }}.{{ domain }}"
+    volumes: /volumes/letschat/data:/tmp/uploads
+    ports: "{{ letschat_http_port }}:5000,{{ letschat_ssh_port }}:5222"
+  notify: Start letschat container
+
+- name: letschat site
+  template:
+    src: site.conf
+    dest: /volumes/etc/nginx/sites-enabled/letschat.conf
+  notify: Restart Nginx container

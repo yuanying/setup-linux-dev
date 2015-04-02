@@ -1,0 +1,5 @@
+- name: Start letschat container
+  service: name=letschat state=started
+
+- name: Restart letschat container
+  service: name=letschat state=restarted

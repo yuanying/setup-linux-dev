@@ -1,0 +1,9 @@
+- name: Upstart mongo conf
+  copy: src=upstart.conf dest=/etc/init/mongo.conf
+
+- name: mongo container
+  docker: >
+    name=mongo-container
+    image=mongo:3.0.1
+    volumes=/volumes/mongo/data:/data/db
+  notify: Start mongo container
