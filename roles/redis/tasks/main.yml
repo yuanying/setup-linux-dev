@@ -4,6 +4,6 @@
 - name: redis container
   docker: >
     name=redis-container
-    image=sameersbn/redis:2.8
+    image=sameersbn/redis
     volumes=/volumes/redis/data:/var/lib/redis
   notify: Start redis container
