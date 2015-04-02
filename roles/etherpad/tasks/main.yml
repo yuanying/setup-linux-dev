@@ -9,6 +9,18 @@
     group: root
     mode: 0755
 
+- name: Create etherpad database
+  docker:
+    name: create-etherpad-database
+    image: mysql
+    links: mysql-container:mysql
+    detach: False
+    command: >
+      sh -c 'exec echo "create database if not exists etherpad DEFAULT CHARACTER SET utf8" |
+      mysql -h"$MYSQL_PORT_3306_TCP_ADDR"
+      -P"$MYSQL_PORT_3306_TCP_PORT"
+      -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
 - name: etherpad container
   docker:
     name: etherpad-container
