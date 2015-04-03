@@ -9,6 +9,7 @@
     hostname: "{{ letschat_host }}.{{ domain }}"
     volumes: /volumes/letschat/data:/tmp/uploads
     ports: "{{ letschat_http_port }}:5000,{{ letschat_xmpp_port }}:5222"
+    env: PORT=5000
   notify: Start letschat container
 
 - name: letschat site
