@@ -15,6 +15,7 @@ Setup local development environment
 ### Example of vars/local.yml
 
     ---
+    localhost: true
     proxy:
       http_proxy: http://proxy.host:8080
       https_proxy: http://proxy.host:8080
