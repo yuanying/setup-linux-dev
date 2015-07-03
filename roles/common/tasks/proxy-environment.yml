@@ -50,7 +50,7 @@
   command: reboot
   sudo: yes
   when: >
-    localhost == false and
+    is_localhost == false and
     no_proxy_result.changed == true or
     http_proxy_result.changed == true or
     https_proxy_result.changed == true or

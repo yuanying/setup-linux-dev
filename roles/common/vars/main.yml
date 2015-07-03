@@ -1,4 +1,0 @@
-localhost: false
-proxy:
-  http_proxy: false
-  https_proxy: false

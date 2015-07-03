@@ -1,4 +1,5 @@
 ---
+is_localhost: False
 proxy:
   http_proxy: False
   https_proxy: False
